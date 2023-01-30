@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="mx-4">
+      <form onsubmit="CreateList()" class="flex row">
+        <input id="list_title" type="text" />
+        <input id="list_desc" type="text" />
+        <button>add</button>
+      </form>
+      <div id="test" class="flex column gap-1"></div>
+    </div>
+  </body>
+  <script>
+    var htmlList = "";
+    var ajax = new XMLHttpRequest();
+    var List;
+    function readlist() {
+      ajax.open(
+        "GET",
+        "http://localhost/CS_Elective_3/Assessment_Activity/api/lists"
+      );
+
+      ajax.send();
+      ajax.onload = function () {
+        List = JSON.parse(this.responseText).payload;
+        console.log(List);
+        htmlList = "";
+        List.forEach((index) => {
+          //   console.log(index);
+          htmlList +=
+            "<form onsubmit='event.preventDefault() '>" +
+            "<p>" +
+            "<input name='list_id' class='w-2'  value='" +
+            index.list_id +
+            "''> <input name='list_title' value='" +
+            index.list_title +
+            "''>" +
+            "<input class='ml-2' name='list_desc' value='" +
+            index.list_desc +
+            "''> </p> " +
+            "<button onclick=(Deletelist(" +
+            index.list_id +
+            "))> Delete </button>" +
+            "<button onclick='UpdateList(list_id.value,list_title.value,list_desc.value)'> update</button> " +
+            "</form>";
+          //   console.log(htmlList);
+        });
+        document.getElementById("test").innerHTML = htmlList;
+      };
+    }
+    readlist();
+    function Deletelist(id) {
+      ajax.open(
+        "DELETE",
+        "http://localhost/CS_Elective_3/Assessment_Activity/api/list/" + id
+      );
+      ajax.send();
+      ajax.onload = function () {
+        readlist();
+      };
+    }
+    function CreateList() {
+      event.preventDefault();
+      ajax.open(
+        "POST",
+        "http://localhost/CS_Elective_3/Assessment_Activity/api/create"
+      );
+      data = {
+        list_title: document.getElementById("list_title").value,
+        list_desc: document.getElementById("list_desc").value,
+      };
+      console.log(data);
+      ajax.send(JSON.stringify(data));
+      ajax.onload = function () {
+        readlist();
+        document.getElementById("list_title").value = "";
+        document.getElementById("list_desc").value = "";
+      };
+    }
+    function UpdateList(list_id, list_title, list_desc) {
+      console.log(list_id + " " + list_title + " " + list_desc);
+      ajax.open(
+        "POST",
+        "http://localhost/CS_Elective_3/Assessment_Activity/api/update"
+      );
+      var data = {
+        list_id,
+        list_title,
+        list_desc,
+      };
+      ajax.send(JSON.stringify(data));
+      ajax.onload = function () {
+        readlist();
+      };
+    }
+    document.getElementById("test").innerHTML = htmlList;
+  </script>
+</html>

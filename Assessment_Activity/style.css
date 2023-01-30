@@ -1,0 +1,65 @@
+.flex {
+  display: flex;
+}
+.row {
+  flex-direction: row;
+}
+.column {
+  flex-direction: column;
+}
+.ml-1 {
+  margin-left: 1rem;
+}
+.ml-2 {
+  margin-left: 2rem;
+}
+.ml-3 {
+  margin-left: 3rem;
+}
+.ml-4 {
+  margin-left: 4rem;
+}
+.my-1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.my-2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.my-3 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.my-4 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+.mx-1 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.mx-2 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.mx-3 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+.mx-4 {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+.gap-1 {
+  gap: 1rem;
+}
+body {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+.w-2 {
+  width: 2rem;
+}
