@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger("user");
-            $table->unsignedInteger("item");
+            $table->unsignedBigInteger("user_id")->nullable();
+            $table->unsignedBigInteger("item_id")->nullable();
             $table->double('total');
             $table->timestamps();
         });
