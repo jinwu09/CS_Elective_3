@@ -16,4 +16,8 @@ class ItemController extends Controller
     {
         return Item::all()->where('id', '=', $id)->first();
     }
+    public function store(Request $request)
+    {
+        // return
+    }
 }
